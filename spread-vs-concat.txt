@@ -1,0 +1,18 @@
+concat and spreads are very different when the argument is not an array.
+
+When the argument is not an array, concat adds it as a whole, while ... tries to iterate it and fails if it can't. Consider:
+
+a = [1, 2, 3]
+x = 'hello';
+
+console.log(a.concat(x));  // [ 1, 2, 3, 'hello' ]
+console.log([...a, ...x]); // [ 1, 2, 3, 'h', 'e', 'l', 'l', 'o' ]
+Here, concat treats the string atomically, while ... uses its default iterator, char-by-char.
+
+Another example:
+
+x = 99;
+
+console.log(a.concat(x));   // [1, 2, 3, 99]
+console.log([...a, ...x]);  // TypeError: x is not iterable
+Again, for concat the number is an atom, ... tries to iterate it and fails.
